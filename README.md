@@ -13,15 +13,15 @@ Requirements (Tensorflow 2.x requires Python 3.5 to 3.7.):
 Next, clone the repo:
 
 ```shell
-https://github.com/AlexJCM/keras-model-with-flask.git
+git clone https://github.com/AlexJCM/keras-model-with-flask.git
 cd keras-model-with-flask/
 ```
 
 Download the following two files and put them in the `keras-model-with-flask` folder:
 
-- https://drive.google.com/file/d/1-5S3QUXLQ8cwZj17ic77lGSw7Qf40XXK/view?usp=sharing
+- [keras_model.h5](https://drive.google.com/file/d/1-5S3QUXLQ8cwZj17ic77lGSw7Qf40XXK/view?usp=sharing)
 
-- https://drive.google.com/file/d/1-6wMqDINf7sK541AQ1ReG5TO_qWAaD9R/view?usp=sharing
+- [keras_weights.h5](https://drive.google.com/file/d/1-6wMqDINf7sK541AQ1ReG5TO_qWAaD9R/view?usp=sharing)
 
 ## Install libraries:
 
