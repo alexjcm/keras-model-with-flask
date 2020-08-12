@@ -1,18 +1,16 @@
 # SERVER SIDE
-
 # USAGE
 # Start the server:
 # 	python run_keras_server.py
-# Submit a request via cURL:
-# 	curl -X POST -F image=@dog.jpg 'http://localhost:5000/predict'
-# Submita a request via Python:
-#	python simple_request.py
 
-# import the necessary packages
+# Submita a request via Python:
+# python simple_request.py
+
 from tensorflow import keras
 from keras.preprocessing.image import img_to_array, load_img
 from keras.applications import imagenet_utils
 from keras.models import load_model
+from keras.models import model_from_json
 from PIL import Image
 import numpy as np
 import flask
@@ -26,12 +24,16 @@ model = None
 # Para cargar nuestro modelo Keras entrenado y prepararlo para la inferencia
 def load_my_model():
     global model
-    model = load_model('keras_model.h5')  # v3
-    model.load_weights('keras_weights.h5')
-
+    # model = load_model('keras_model.h5')  # v3
+    with open('resources/keras_model.json') as json_file:
+        json_config = json_file.read()
+    model = model_from_json(json_config)
+    model.load_weights('resources/keras_weights.h5')
 
 # Procesa previamente una imagen de entrada antes de pasarla a través
 # de nuestra red para la predicción.
+
+
 def prepare_image(image, target):
     # if the image mode is not RGB, convert it
     if image.mode != "RGB":
@@ -77,14 +79,15 @@ def predict():
             image = flask.request.files["image"].read()
             image = Image.open(io.BytesIO(image))
 
-            # preprocesar la imagen y prepararla para su clasificación
+            # preprocesar la imagen y prepararla para su clasificación.
+            # Se pone en target el mismo tamaño establecido durante el entrenamiento.
             image = prepare_image(image, target=(224, 224))
 
             # Clasificar la imagen de entrada y luego inicializar la lista
             # de predicciones para retornarla al cliente
             preds = model.predict(image)
             results = decode_predictionss(
-                preds, 4, 'labels.json')
+                preds, 4, 'resources/labels.json')
 
             data["predictions"] = []
 
