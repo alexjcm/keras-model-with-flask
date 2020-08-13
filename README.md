@@ -17,9 +17,7 @@ git clone https://github.com/AlexJCM/keras-model-with-flask.git
 cd keras-model-with-flask/
 ```
 
-Download the following two files and put them in the `keras-model-with-flask` folder:
-
-- [keras_model.h5](https://drive.google.com/file/d/1-5S3QUXLQ8cwZj17ic77lGSw7Qf40XXK/view?usp=sharing)
+Download the following file and put them in the `keras-model-with-flask/resources` folder:
 
 - [keras_weights.h5](https://drive.google.com/file/d/1-6wMqDINf7sK541AQ1ReG5TO_qWAaD9R/view?usp=sharing)
 

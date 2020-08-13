@@ -1,0 +1,4 @@
+# [START gae_python3_custom_runtime]
+runtime: python37
+entrypoint: gunicorn -b :8080 main:app
+# [END gae_python3_custom_runtime]
