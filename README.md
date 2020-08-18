@@ -32,7 +32,7 @@ pip install -r requirements.txt
 ## Start local server:
 
 ```shell
-python run_keras_server.py
+python main.py
 ```
 
 - Go to http://localhost:5000

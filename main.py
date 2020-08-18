@@ -1,20 +1,23 @@
 # SERVER SIDE
 # USAGE
 # Start the server:
-# 	python run_keras_server.py
-
-# Submita a request via Python:
-# python simple_request.py
-
-from tensorflow import keras
-from keras.preprocessing.image import img_to_array, load_img
-from keras.applications import imagenet_utils
-from keras.models import load_model
-from keras.models import model_from_json
-from PIL import Image
-import numpy as np
-import flask
+# 	python main.py
+# Submit a request via Python:
+# python example_request.py
 import io
+import flask
+from tensorflow import keras
+import numpy as np
+from PIL import Image
+from keras.models import model_from_json
+from keras.models import load_model
+from keras.applications import imagenet_utils
+from keras.preprocessing.image import img_to_array, load_img
+
+import os
+
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+
 
 # initialize our Flask application and the Keras model
 app = flask.Flask(__name__)
@@ -127,4 +130,4 @@ if __name__ == "__main__":
     print(("* Loading Keras model and Flask starting server..."
            "please wait until server has fully started"))
     load_my_model()
-    app.run()
+    app.run(port=5000)

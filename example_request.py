@@ -3,7 +3,6 @@
 # USAGE
 # python simple_request.py
 
-
 import requests
 
 # initialize the Keras REST API endpoint URL along with the input
