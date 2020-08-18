@@ -133,5 +133,5 @@ dmypy.json
 .pyre/
 
 # Files Keras model
-#*.h5
+*.h5
 token.pickle
