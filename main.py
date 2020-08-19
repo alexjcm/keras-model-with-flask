@@ -14,17 +14,13 @@ from keras.models import load_model
 from keras.applications import imagenet_utils
 from keras.preprocessing.image import img_to_array, load_img
 
-import os
-
-os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
-
-
 # initialize our Flask application and the Keras model
 app = flask.Flask(__name__)
 model = None
 
-
 # Para cargar nuestro modelo Keras entrenado y prepararlo para la inferencia
+
+
 def load_my_model():
     global model
     # model = load_model('keras_model.h5')  # v3
@@ -33,10 +29,9 @@ def load_my_model():
     model = model_from_json(json_config)
     model.load_weights('resources/keras_weights.h5')
 
+
 # Procesa previamente una imagen de entrada antes de pasarla a través
 # de nuestra red para la predicción.
-
-
 def prepare_image(image, target):
     # if the image mode is not RGB, convert it
     if image.mode != "RGB":
@@ -53,10 +48,7 @@ def prepare_image(image, target):
 
 def decode_predictionss(preds, top, class_list_path):
     if len(preds.shape) != 2 or preds.shape[1] != 2:  # your classes number
-        raise ValueError('`XXXXXXXXXXXX decode_predictions` expects '
-                         'a batch of predictions '
-                         '(i.e. a 2D array of shape (samples, 1000)). '
-                         'Found array with shape: ' + str(preds.shape))
+        raise ValueError('XXXXXXXXXXXX' + str(preds.shape))
 
     index_list = flask.json.load(open(class_list_path))
     results = []
@@ -71,8 +63,8 @@ def decode_predictionss(preds, top, class_list_path):
 # solicitud y devolverá los resultados al cliente.
 @app.route("/predict", methods=["POST"])
 def predict():
-        # initialize the data dictionary that will be returned from the
-        # view
+    # initialize the data dictionary that will be returned from the
+    # view
     data = {"success": False}
 
     # Asegúrate de que una imagen se suba correctamente a nuestro endpoint.
@@ -100,7 +92,7 @@ def predict():
                 r = {"label": label, "probability": float(prob)}
                 data["predictions"].append(r)
 
-            # ************EXTRAAAA********************
+            # ************ NEW FEATURE ********************
             result = preds[0]
             # arroja la posicion donde esta el valor mayor
             answer = np.argmax(result)
@@ -108,10 +100,9 @@ def predict():
                 my_label = "benign"
             elif answer == 1:
                 my_label = "malignant"
-            r2 = {"my_label": my_label, "probability": float(answer)}
+            r2 = {"final_label": my_label, "final_probability": float(answer)}
             data["predictions"].append(r2)
-            # ********************************
-
+            # *********************************************
             # Indique que la solicitud fue un éxito.
             data["success"] = True
 
@@ -128,6 +119,6 @@ def index():
 # then start the server
 if __name__ == "__main__":
     print(("* Loading Keras model and Flask starting server..."
-           "please wait until server has fully started"))
+           " please wait until server has fully started"))
     load_my_model()
-    app.run(port=5000)
+    app.run()

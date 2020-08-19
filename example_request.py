@@ -1,5 +1,4 @@
 # CLIENT SIDE
-
 # USAGE
 # python simple_request.py
 
