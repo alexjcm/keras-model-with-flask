@@ -1,7 +1,7 @@
 gevent==20.6.2
 Flask==1.1.2
 Keras==2.4.3
-Pillow==7.2.0
+Pillow==8.1.1
 requests==2.24.0
 tensorflow==2.3.0
 numpy==1.18.5
